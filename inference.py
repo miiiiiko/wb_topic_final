@@ -132,7 +132,7 @@ def write_to_csv(id2l, out_path):
 
 
 if __name__ == '__main__':
-    transfer_test('./dataset/test.csv','./dataset/test.json')
+    transfer_test('./dataset/raw_data/test.csv','./dataset/test.json')
     # model_name = 'hfl/chinese-roberta-wwm-ext'
     # tokenizer = BertTokenizer.from_pretrained(model_name)
     test_data = load_test('./dataset/test.json')
@@ -146,15 +146,8 @@ if __name__ == '__main__':
     'base7noemo.ckpt','base7noemo_n2.ckpt']
     mfile_l = ['./model_states/' + s for s in file_l]
 
-    # mfile_l =  ['./output/ljq/wb_base_retrain_lock7_diceloss_normd2_8981.pt','./output/ljq/wb_base2_noseg_normd2.pt'] + ['./output/base5/base5.ckpt', './output/base1/256base1.pt','./output/base7/128_base7.ckpt', './output/extra/128_base7_plus5.ckpt','./output/base7/wb_base_noseg_normd1_8855.pt',
-    # './output/ljq/wb_base_retrain_lock7_diceloss2_normd1_8846.pt','./output/ljq/wb_base_retrain2_lock10_diceloss_normd1_8871.pt','./output/ljq/wb_base_retrain2_lock7_diceloss_normd1_8858.pt',
-    # './output/ljq/wb_base_retrain_lock8_normd1_8844.pt','./output/ljq/wb_base_retrain_lock7_diceloss_normd1_8867.pt','./output/ljq/wb_base_retrain_lock6_normd1_8859.pt',
-    # './output/base7/base7noemo.ckpt','./output/base7/base7noemo_n2.ckpt']
-    # print(len(mfile_l))
-    source = LoadJsons('./dataset/train.json')
-    # llist = sortlabel.TokenList('sortlabel.txt', source=source, func=lambda x:x['label'], low_freq=1, save_low_freq=1)
+   
     Infer = Inference(model,mfile_l,llist,torch.device('cuda'),n=13)
     res = Infer.infer_on_test(test_data,test_dl)
     write_to_csv(res,'submission.csv')
-    # print(list(res.values())[:5])
-    # print(list(res.keys())[0])
+   
