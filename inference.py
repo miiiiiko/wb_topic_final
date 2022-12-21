@@ -58,14 +58,14 @@ class TestDS(Dataset):
         return len(self.data)
 
 def collate_test(batch):
-    z1 = tokenizer([d[0] for d in batch],return_tensors='pt',truncation=True, max_length=128,padding=True)
+    z1 = tokenizer([d[0] for d in batch],return_tensors='pt',truncation=True, max_length=128,padding=True)  # collate函数将文本通过tokenizer
     z2 = tokenizer([d[1] for d in batch],return_tensors='pt',truncation=True, max_length=128,padding=True)
     return (z1.input_ids,
             z2.input_ids,
             torch.cat([x[2] for x in batch], 0),
             torch.cat([x[3] for x in batch], 0))
 
-class Inference:
+class Inference:  # 进行推断
     def __init__(self, model, mfile_l, llist, device=torch.device('cuda'),n=11):
         self.device = device
         self.model_l = [deepcopy(model).to(device) for i in range(len(mfile_l))]
