@@ -17,6 +17,7 @@
 
 最终的结果由15个模型ensemble生成，15个模型参数由1.修改模型activation=True，修改损失为nn.BCEloss 2.锁定transformer不同层的参数 3.在原来参数基础上加上r-drop/smooth-f1-loss-linear继续训练 4.使用pu_loss 4种方法生成
 
-主要采用的方法是Roberta-wmm + mlp, 损失我们尝试了nn.BCEloss(), 多标签softmax损失函数，具体见：https://spaces.ac.cn/archives/7359/comment-page-1，r-drop（利用dropout的随机性），smooth_f1_loss_linear（针对f1指标的平滑实现）。训练过程中还尝试了冷冻transformer层参数的办法。除了Roberta-wmm外我们还尝试了其他bert，比如ERNIE，最终效果并没有超过Roberta，因此最后没有采用。
+主要采用的方法是Roberta-wmm + mlp, 损失我们尝试了nn.BCEloss(), 多标签softmax损失函数，具体见：https://spaces.ac.cn/archives/7359/comment-page-1，
+r-drop（利用dropout的随机性），smooth_f1_loss_linear（针对f1指标的平滑实现）。训练过程中还尝试了冷冻transformer层参数的办法。除了Roberta-wmm外我们还尝试了其他bert，比如ERNIE，最终效果并没有超过Roberta，因此最后没有采用。
 
 数据处理方面，首先去除了网络爬虫带来的一些额外字段，其次去除了表情，并将繁体字转换成中文，为了调用方便，数据存储方式都采取了.json的格式。
