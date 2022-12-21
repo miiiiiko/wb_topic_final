@@ -1,6 +1,8 @@
 import torch
 import torch.nn.functional as F
 
+# 各种损失函数
+
 
 def compute_kl_loss(p, q, pad_mask=None):  # R-Drop损失函数
     # pad_mask = (pad_mask > 0.5)
