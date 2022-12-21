@@ -188,7 +188,7 @@ if __name__ == '__main__':
     model = Model(model_name, llist.get_num()).to(device)
     # model = Model(model_name, llist.get_num(),activation=True).to(device)
     # 为了避免过拟合对ransformer层进行锁层，即冷冻部分参数，此处是否锁层、锁哪些层训练出不同的模型参数，可以加快模型的训练速度
-    pt_utils.lock_transformer_layers(model.encoder, 10)
+    # pt_utils.lock_transformer_layers(model.encoder, 10)
     ds_train, ds_test = MyDataset(xys[0]), MyDataset(xys[1])
     print('loading data completed')
     dl_train = torch.utils.data.DataLoader(ds_train, batch_size=32, shuffle=True, collate_fn=collate_fn)
