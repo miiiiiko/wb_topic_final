@@ -62,7 +62,7 @@ def check_text(text,lab2word=lab2word):
     return indices
 
 
-class Val0_Classify():
+class Val0_Classify():  # 对预测结果判定规则后，使用该方法进行重新预测
     def __init__(self,llist):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.tl = llist
