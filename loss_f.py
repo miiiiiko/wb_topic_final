@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 
 
-def compute_kl_loss(p, q, pad_mask=None):
+def compute_kl_loss(p, q, pad_mask=None):  # R-Drop损失函数
     # pad_mask = (pad_mask > 0.5)
     # p_plus = torch.stack([p,1-p],2)
     # q_plus = torch.stack([q,1-q],2)
@@ -22,7 +22,7 @@ def compute_kl_loss(p, q, pad_mask=None):
     return loss
 
 
-def multilabel_categorical_crossentropy(y_pred,y_true):
+def multilabel_categorical_crossentropy(y_pred,y_true):  # 多标签分类的损失函数
     y_pred = (1 - 2 * y_true) * y_pred    # y_true为0的项，y_pred不变，否则×-1
     y_pred_neg = y_pred - y_true * 1e12   # y_true为1的项，y_pred变成-无穷，否则不变
     y_pred_pos = y_pred - (1 - y_true) * 1e12 # y_true为0的项，y_pred变负无穷，否则变为原来-1
