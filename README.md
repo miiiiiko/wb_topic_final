@@ -13,7 +13,7 @@
 
 若想验证模型在验证集上效果，请运行merge_predict.py.
 
-参数已放至网盘：
+参数已放至网盘：链接：https://pan.baidu.com/s/17JIuT9ATDNiPvZ6UAZN-CQ 提取码：6q9c 
 
 最终的结果由15个模型ensemble生成，15个模型参数由1.修改模型activation=True，修改损失为nn.BCEloss 2.锁定transformer不同层的参数 3.在原来参数基础上加上r-drop/smooth-f1-loss-linear继续训练 4.使用pu_loss 4种方法生成
 
