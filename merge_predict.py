@@ -135,7 +135,7 @@ class Multi_label:
                     # true_id = yy[idx].nonzero().squeeze(1)
                     # pred_id = z.nonzero().squeeze(1)
                     # z_score = [(self.tl.get_token(j),scores[idx][j].item()) for j in pred_id]
-                    if sum(z) == 0:
+                    if sum(z) == 0:  # 没有预测出标签时，用规则的argmax方法重新预测
                         z_vec = Classifier.fun(scores_max[idx])
                     # z_vec = transfer_z(z_vec)
                     zz[idx] = z_vec
@@ -175,7 +175,7 @@ class Multi_label:
         return bad_case_indices #,true_score_l, pred_score_l
 
 
-def write_bad_to_json(val_data,bad_case_indices,true_score_l, pred_score_l, out_path):
+def write_bad_to_json(val_data,bad_case_indices,true_score_l, pred_score_l, out_path):  # 将生成错误的例子加入到json文件中
     data = []
     for i in range(len(bad_case_indices)):
         d = {}
